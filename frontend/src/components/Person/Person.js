@@ -1,6 +1,9 @@
 import React from 'react';
 import './Person.css';
 
+// Libraries
+import { motion } from 'framer-motion';
+
 const numberToMonth = {
   '01': 'Jan.',
   '02': 'Feb.',
@@ -21,7 +24,7 @@ const tierDisplayString = {
   '1.5': 'T1.5',
   '2': 'T2',
   '3': 'T3',
-  'f': 'F',
+  'family': 'F',
 }
 
 const getBirthdayDisplayString = (birthday) => {
@@ -45,13 +48,20 @@ const Person = ({firstName, lastName, nickName, birthday, tier}) => {
   // console.log(birthdayDisplayString)
 
   return(
-    <div className="person">
+    <motion.div
+      className="person"
+      variants={{
+        hidden: { y: 32, opacity: 0 },
+        show: { y: 0, opacity: 1 },
+      }}
+      // transition={{ type: 'spring', duration: 0.25 }}
+    >
       <div>
         <p className="person-title">{`${nameDisplayString}, ${currentAge}` || 'Name, Age'}</p>
         <p className="person-birthday">{birthdayDisplayString || 'Birthday'}</p>
       </div>
       <p className="person-tier">{tierDisplayString[tier] || 'T?'}</p>
-    </div>
+    </motion.div>
   );
 }
 

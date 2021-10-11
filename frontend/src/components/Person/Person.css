@@ -5,7 +5,7 @@
   /* border: 1px solid var(--tier-one-color-transparent); */
   border-radius: 8px;
   background-color: var(--main-color);
-  /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1); */
 
   /* font-weight: 350; */
 
@@ -30,15 +30,16 @@
 }
 
 .person-tier {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   box-sizing: border-box;
 
   color: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  border-radius: 16px;
+  border: 1px solid var(--accent-color);
+  border-radius: 21px;
   text-align: center;
   /* background-color: ; */
+  font-weight: 300;
 
   display: flex;
   justify-content: center;

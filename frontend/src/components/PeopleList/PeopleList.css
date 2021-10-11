@@ -1,4 +1,5 @@
 .people-list {
+  margin-top: 32px;
   padding: var(--vertical-gap) var(--horizontal-gap);
   background-color: var(--bg-color);
 

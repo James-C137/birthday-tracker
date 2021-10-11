@@ -3,55 +3,45 @@ import './PeopleList.css';
 
 // Libraries
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 // Components
 import Person from '../Person/Person';
 
-// const people = [
-//   {
-//     id: 'aaa-bbb',
-//     firstName: 'Aaa',
-//     lastName: 'Bbb',
-//     nickName: 'Ab',
-//     birthday: '2001-01-01',
-//     tier: '1',
-//   },
-//   {
-//     id: 'ccc-ddd',
-//     firstName: 'Ccc',
-//     lastName: 'Ddd',
-//     nickName: 'Cd',
-//     birthday: '2002-02-02',
-//     tier: '1',
-//   },
-//   {
-//     id: 'eee-fff',
-//     firstName: 'Eee',
-//     lastName: 'Fff',
-//     nickName: 'Ef',
-//     birthday: '2003-03-03',
-//     tier: '1',
-//   },
-//   {
-//     id: 'ggg-hhh',
-//     firstName: 'Ggg',
-//     lastName: 'Hhh',
-//     nickName: 'Gh',
-//     birthday: '2004-04-04',
-//     tier: '1',
-//   },
-// ];
-
 const PeopleList = () => {
-  const [people, setPeople] = React.useState([]);
+  const [people, setPeople] = React.useState();
 
   React.useEffect(() => {
     const fetchData = async () => {
       let response = null;
       try {
         response = await axios.get('https://2vspad0pd5.execute-api.us-east-1.amazonaws.com/');
-        setPeople(response.data);
-        console.log(response.data);
+        const people = response.data;
+        people.sort((a, b) => {
+          const temp0 = a['birthday'].split('-');
+          const temp1 = b['birthday'].split('-');
+          const months = [parseInt(temp0[1]) || Infinity, parseInt(temp1[1]) || Infinity];
+          const days = [parseInt(temp0[2]) || Infinity, parseInt(temp1[2]) || Infinity];
+
+          // Initially, sort by months
+          if (months[0] < months[1]) {
+            return -1;
+          }
+          else if (months[0] > months[1]) {
+            return 1;
+          }
+          
+          // If same month, sort by day
+          if (days[0] < days[1]) {
+            return -1;
+          }
+          else if (days[0] > days[1]) {
+            return 1;
+          }
+
+          return 0;
+        });
+        setPeople(people);
       }
       catch (error) {
         console.log(error);
@@ -61,9 +51,14 @@ const PeopleList = () => {
   }, []);
   
   return (
-    <div className="people-list">
-      <p>Upcoming Birthdays</p>
-      {
+    people ? <motion.div
+      className="people-list"
+      initial={'hidden'}
+      animate={'show'}
+      transition={{ staggerChildren: 0.05 }}
+    >
+      <p>Birthdays</p>
+      {  
         people.map((person) => (
           <Person
             key={person['id']}
@@ -75,7 +70,7 @@ const PeopleList = () => {
           />
         ))
       }
-    </div>
+    </motion.div> : null
   );
 }
 

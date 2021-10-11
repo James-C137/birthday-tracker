@@ -29,6 +29,7 @@ const Sidebar = () => {
         animate={sidebarState.isOpen? 'open' : 'closed'}
         variants={sidebarShadowVariants}
         transition={{type: 'tween'}}
+        initial={false}
         // onClick={() => {sidebarDispatch({type: 'TOGGLE_SIDEBAR'})}}
       />
       <motion.nav
@@ -36,6 +37,7 @@ const Sidebar = () => {
         animate={sidebarState.isOpen? 'open' : 'closed'}
         variants={sidebarVariants}
         transition={{type: 'tween'}}
+        initial={false}
       >
         <div className="sidebar-close" onClick={() => {sidebarDispatch({type: 'TOGGLE_SIDEBAR'})}}>
           <i className="fas fa-times"/>

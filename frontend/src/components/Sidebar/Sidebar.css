@@ -3,6 +3,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.25);
   position: fixed;
+  top: 32px;
 }
 
 .sidebar-content {
@@ -12,6 +13,7 @@
   background-color: var(--bg-color);
   /* background-color: rgba(250, 250, 250, 0.95); */
   position: fixed;
+  top: 32px;
 }
 
 .sidebar-close {
