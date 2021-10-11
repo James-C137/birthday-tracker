@@ -1,0 +1,30 @@
+.sidebar-shadow {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
+}
+
+.sidebar-content {
+  width: min(80vw, 320px);
+  height: 100vh;
+  padding: var(--vertical-gap) var(--horizontal-gap);
+  background-color: var(--bg-color);
+  /* background-color: rgba(250, 250, 250, 0.95); */
+  position: fixed;
+}
+
+.sidebar-close {
+  width: 32px;
+  height: 32px;
+  background-color: var(--main-color);
+  border-radius: 16px;
+  position: absolute;
+  right: var(--horizontal-gap);
+
+  font-size: var(--icon-size);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

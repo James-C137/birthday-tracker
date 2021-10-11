@@ -1,0 +1,18 @@
+.people-list {
+  padding: var(--vertical-gap) var(--horizontal-gap);
+  background-color: var(--bg-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.people-list > p {
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  font-family: Montserrat;
+  font-size: 28px;
+  line-height: 24px;
+  /* font-weight: 350; */
+}

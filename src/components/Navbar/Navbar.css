@@ -1,0 +1,12 @@
+.navbar {
+  height: 32px;
+  padding: 0px var(--horizontal-gap);
+  background-color: var(--navbar-color);
+  /* border-bottom: 1px solid var(--secondary-color-transparent); */
+
+  font-size: var(--icon-size);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

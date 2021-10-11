@@ -1,0 +1,46 @@
+.person {
+  /* height: 80px; */
+  /* padding: 8px 8px; */
+  padding: 12px;
+  /* border: 1px solid var(--tier-one-color-transparent); */
+  border-radius: 8px;
+  background-color: var(--main-color);
+  /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); */
+
+  /* font-weight: 350; */
+
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.person-title {
+  margin-bottom: 12px;
+
+  color: var(--accent-color);
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.person-birthday {
+  color: var(--font-color);
+  font-size: 14px;
+  line-height: 14px;
+  font-style: italic;
+}
+
+.person-tier {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 16px;
+  text-align: center;
+  /* background-color: ; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
