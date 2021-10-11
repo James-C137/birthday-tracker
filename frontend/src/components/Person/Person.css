@@ -11,7 +11,7 @@
 
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .birthday-today {
@@ -22,19 +22,39 @@
   background-color: var(--accent-color-soon);
 }
 
+.person-birthday {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  padding-right: 8px;
+  border-right: 1px solid var(--divider-color);
+  /* border-right: 1px solid red; */
+
+  /* color: var(--accent-color); */
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.person-birthday-day {
+  font-size: 20px;
+}
+
+.person-birthday-month {
+  font-size: 14px;
+}
+
 .person-title {
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 
   color: var(--accent-color);
   font-size: 20px;
   line-height: 20px;
-}
 
-.person-birthday {
-  color: var(--font-color);
-  font-size: 14px;
-  line-height: 14px;
-  font-style: italic;
+  flex-grow: 1;
 }
 
 .person-tier {
