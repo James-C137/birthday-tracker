@@ -6,6 +6,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 
 // Components
+import PeopleDivider from '../PeopleDivider/PeopleDivider';
 import Person from '../Person/Person';
 
 const PeopleList = () => {
@@ -17,30 +18,29 @@ const PeopleList = () => {
       try {
         response = await axios.get('https://2vspad0pd5.execute-api.us-east-1.amazonaws.com/');
         const people = response.data;
-        people.sort((a, b) => {
-          const temp0 = a['birthday'].split('-');
-          const temp1 = b['birthday'].split('-');
-          const months = [parseInt(temp0[1]) || Infinity, parseInt(temp1[1]) || Infinity];
-          const days = [parseInt(temp0[2]) || Infinity, parseInt(temp1[2]) || Infinity];
 
-          // Initially, sort by months
-          if (months[0] < months[1]) {
-            return -1;
-          }
-          else if (months[0] > months[1]) {
-            return 1;
-          }
-          
-          // If same month, sort by day
-          if (days[0] < days[1]) {
-            return -1;
-          }
-          else if (days[0] > days[1]) {
-            return 1;
-          }
+        const date = new Date();
+        const currentDayNumber = date.getMonth() * 31 + date.getDate();
 
-          return 0;
+        people.forEach(person => {
+          const temp = person['birthday'].split('-');
+          const month = parseInt(temp[1]) || Infinity;
+          const day = parseInt(temp[2]) || Infinity;
+          const sortNumber = (month-1) * 31 + day;
+          person['sort-number'] = sortNumber < currentDayNumber ? sortNumber + 366 : sortNumber;
+
+          const birthdayProximity = person['sort-number'] - currentDayNumber;
+          if (birthdayProximity === 0) {
+            person['birthday-proximity'] = 'today';
+          }
+          else if (birthdayProximity <= 14) {
+            person['birthday-proximity'] = 'soon';
+          }
+          else {
+            person['birthday-proximity'] = 'far';
+          }
         });
+        people.sort((a, b) => (a['sort-number'] - b['sort-number']));
         setPeople(people);
       }
       catch (error) {
@@ -49,6 +49,43 @@ const PeopleList = () => {
     }
     fetchData();
   }, []);
+
+  const renderPeople = () => {
+    if (people.length < 1) return null;
+
+    const list = [];
+    list.push(
+      <Person
+        key={people[0]['id']}
+        firstName={people[0]['first-name']}
+        lastName={people[0]['last-name']}
+        nickName={people[0]['nickname']}
+        birthday={people[0]['birthday']}
+        birthdayProximity={people[0]['birthday-proximity']}
+        tier={people[0]['tier']}
+      />
+    );
+
+    for (let i = 1; i < people.length; i++) {
+      const person = people[i];
+      if (person['birthday-proximity'] !== people[i-1]['birthday-proximity']) {
+        list.push(<PeopleDivider />);
+      }
+      list.push(
+        <Person
+          key={person['id']}
+          firstName={person['first-name']}
+          lastName={person['last-name']}
+          nickName={person['nickname']}
+          birthday={person['birthday']}
+          birthdayProximity={person['birthday-proximity']}
+          tier={person['tier']}
+        />
+      )
+    }
+    
+    return list;
+  }
   
   return (
     people ? <motion.div
@@ -59,16 +96,18 @@ const PeopleList = () => {
     >
       <p>Birthdays</p>
       {  
-        people.map((person) => (
-          <Person
-            key={person['id']}
-            firstName={person['first-name']}
-            lastName={person['last-name']}
-            nickName={person['nickname']}
-            birthday={person['birthday']}
-            tier={person['tier']}
-          />
-        ))
+        renderPeople()
+        // people.map((person) => (
+        //   <Person
+        //     key={person['id']}
+        //     firstName={person['first-name']}
+        //     lastName={person['last-name']}
+        //     nickName={person['nickname']}
+        //     birthday={person['birthday']}
+        //     birthdayProximity={person['birthday-proximity']}
+        //     tier={person['tier']}
+        //   />
+        // ))
       }
     </motion.div> : null
   );

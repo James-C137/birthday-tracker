@@ -10,13 +10,13 @@ import { useSidebarContext } from '../../contexts/sidebar/sidebarContext';
 // Components
 
 const sidebarShadowVariants = {
-  open: { opacity: 1 },
-  closed: { opacity: 0 },
+  open: {opacity: 1, display: 'block' },
+  closed: { opacity: 0, transitionEnd: {display: 'none'} },
 }
 
 const sidebarVariants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: '-100%' },
+  open: { opacity: 1, x: 0, display: 'block' },
+  closed: { opacity: 0, x: '-100%', transitionEnd: {display: 'none'} },
 }
 
 const Sidebar = () => {

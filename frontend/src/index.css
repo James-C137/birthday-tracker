@@ -8,8 +8,12 @@
   --bg-color: #f6f6f6;
   /* --bg-color: #f2faf7; */
   --navbar-color: #eaeaea;
+  --divider-color: #d7d7d7;
+
   /* --accent-color: #32a675; */
-  --accent-color: #bf6643;
+  --accent-color: #e64560;  /* HSV 350 70 90 */
+  --accent-color-today: rgb(230, 69, 96, 0.2);
+  --accent-color-soon: rgb(230, 69, 96, 0.1);
   --text-color: #555555;
   --icon-color: #444444;
 

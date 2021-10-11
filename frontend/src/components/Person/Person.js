@@ -41,15 +41,23 @@ const getAge = (birthday) => {
   return currentYear - birthYear;
 }
 
-const Person = ({firstName, lastName, nickName, birthday, tier}) => {
+const Person = ({firstName, lastName, nickName, birthday, birthdayProximity, tier}) => {
   const nameDisplayString = `${firstName} ${lastName}${firstName === nickName ? '' : ` (${nickName})`}`;
   const birthdayDisplayString = getBirthdayDisplayString(birthday);
   const currentAge = getAge(birthday);
   // console.log(birthdayDisplayString)
 
+  let classString = 'person';
+  if (birthdayProximity === 'today') {
+    classString += ' birthday-today';
+  }
+  else if (birthdayProximity === 'soon') {
+    classString += ' birthday-soon';
+  }
+
   return(
     <motion.div
-      className="person"
+      className={classString}
       variants={{
         hidden: { y: 32, opacity: 0 },
         show: { y: 0, opacity: 1 },
@@ -59,6 +67,7 @@ const Person = ({firstName, lastName, nickName, birthday, tier}) => {
       <div>
         <p className="person-title">{`${nameDisplayString}, ${currentAge}` || 'Name, Age'}</p>
         <p className="person-birthday">{birthdayDisplayString || 'Birthday'}</p>
+        { birthdayProximity === 'today' ? 'today' : null }
       </div>
       <p className="person-tier">{tierDisplayString[tier] || 'T?'}</p>
     </motion.div>
