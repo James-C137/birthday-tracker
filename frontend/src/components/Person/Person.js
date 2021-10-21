@@ -39,7 +39,16 @@ const getAge = (birthday) => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const birthYear = parseInt(birthday.split('-')[0]);
-  return currentYear - birthYear;
+
+  let age = currentYear - birthYear;
+  if (
+    date.getMonth()+1 <= parseInt(birthday.split('-')[1]) && 
+    date.getDate() < parseInt(birthday.split('-')[2])
+  ) {
+    age--;
+  }
+
+  return age;
 }
 
 const Person = ({firstName, lastName, nickName, birthday, birthdayProximity, tier}) => {
