@@ -29,7 +29,7 @@ const tierDisplayString = {
 
 const getBirthdayInfo = (birthday) => {
   const temp = birthday.split('-');
-  const year = parseInt(temp[0]);
+  // const year = parseInt(temp[0]);
   const month = numberToMonth[temp[1]];
   const day = parseInt(temp[2]);
   return { month, day };
@@ -50,10 +50,11 @@ const Person = ({firstName, lastName, nickName, birthday, birthdayProximity, tie
   // console.log(birthdayDisplayString)
 
   let classString = 'person';
-  if (birthdayProximity === 'today') {
+
+  if (birthdayProximity === 0) {
     classString += ' birthday-today';
   }
-  else if (birthdayProximity === 'soon') {
+  else if (birthdayProximity <= 14) {
     classString += ' birthday-soon';
   }
 
@@ -64,15 +65,12 @@ const Person = ({firstName, lastName, nickName, birthday, birthdayProximity, tie
         hidden: { y: 32, opacity: 0 },
         show: { y: 0, opacity: 1 },
       }}
-      // transition={{ type: 'spring', duration: 0.25 }}
     >
       <div className="person-birthday">
-        <p className="person-birthday-day">{day}</p>
-        <p className="person-birthday-month">{month}</p>
+        <p className="person-birthday-day">{isNaN(day) ? '???' : day}</p>
+        <p className="person-birthday-month">{month ? month : '???'}</p>
       </div>
       <p className="person-title">{`${titleDisplayString}${currentAge ? `, ${currentAge}` : ''}` || 'Name, Age'}</p>
-      {/* <p className="person-birthday">{birthdayDisplayString || 'Birthday'}</p> */}
-      {/* { birthdayProximity === 'today' ? 'today' : null } */}
       <p className="person-tier">{tierDisplayString[tier] || 'T?'}</p>
     </motion.div>
   );

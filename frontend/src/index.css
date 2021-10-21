@@ -13,8 +13,10 @@
 
   /* --accent-color: #32a675; */
   --accent-color: #e64560;  /* HSV 350 70 90 */
-  --accent-color-today: rgb(230, 69, 96, 0.2);
-  --accent-color-soon: rgb(230, 69, 96, 0.1);
+  /* --accent-color-today: rgb(230, 69, 96, 0.2); */
+  --accent-color-today: hsl(350, 76%, 88%);
+  /* --accent-color-soon: rgb(230, 69, 96, 0.1); */
+  --accent-color-soon: hsl(350, 76%, 94%);
   --text-color: #555555;
   --icon-color: #444444;
 
